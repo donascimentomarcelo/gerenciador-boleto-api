@@ -17,12 +17,6 @@ class CreateClientTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('lastname');
-            $table->integer('ticket_id')->unsigned();
-
-            $table->foreign('ticket_id')
-                ->references('id')
-                ->on('ticket')
-                ->onDelete('cascade');
 
             $table->integer('user_id')->unsigned();
 
