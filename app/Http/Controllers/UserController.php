@@ -23,12 +23,13 @@ class UserController extends Controller
 
 
     public function index(): JsonResponse {
-        dd('ddd');
+        $lista = $this->userService->list();
+        return response()->json($lista, 200);
     }
 
     public function store(Request $req): JsonResponse {
         $this->userService->save($req->all());
-        return response()->json([], 200);
+        return response()->json([], 201);
     }
 
 }

@@ -4,11 +4,16 @@ namespace App\Services;
 
 use App\Client;
 use App\User;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
 class UserService {
 
-    public function save(array $array) {
+    public function list(): LengthAwarePaginator {
+        return Client::paginate(15);
+    }
+
+    public function save(array $array): void {
         DB::transaction(function () use($array) {
         $user = new User($array);
         $user->password = bcrypt($user->password);
