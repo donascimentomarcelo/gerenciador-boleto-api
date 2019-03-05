@@ -17,5 +17,6 @@ use Illuminate\Http\Request;
     Route::resource('users', 'UserController');
     Route::post('users/delete', 'UserController@delete');
 
-    Route::resource('uploads', 'UploadController');
+    Route::post('uploads/store', 'UploadController@store');
+    Route::post('uploads/destroy', 'UploadController@destroy');
 //});

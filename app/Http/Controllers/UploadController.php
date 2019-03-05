@@ -15,8 +15,16 @@ class UploadController extends Controller
         return response()->json([], Response::HTTP_NO_CONTENT);
     }
 
-    public function renameImage(Request $request): array {
-        $return['filenametostore'] = $request->input('username').'.'.$request->file('file')->getClientOriginalExtension();
+    public function renameImage(Request $req): array {
+        $return['filenametostore'] = $req->input('username').'.'.$req->file('file')->getClientOriginalExtension();
         return $return;
+    }
+
+    public function destroy(Request $req) {
+        $array =  $req->all();
+        foreach ($array as $item) {
+            Storage::delete($item . '.pdf');
+        }
+        return response()->json([], Response::HTTP_NO_CONTENT);
     }
 }
