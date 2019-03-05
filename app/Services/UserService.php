@@ -25,12 +25,12 @@ class UserService {
         });
     }
 
-    public function findOne(int $id): User {
+    public function findOne(int $id): ?User {
         return User::with('client')->find($id);
     }
 
     public function edit(array $req, int $id) {
-        $user = User::with('client')->find($id);
+        $user = $this->findOne($id);
 
         if ($user) {
             DB::transaction(function () use($user, $req) {
@@ -39,6 +39,14 @@ class UserService {
                 $user->client->lastname = $req['client']['lastname'];
                 $user->client->save();
                 $user->save();
+            });
+        }
+    }
+
+    public function delete(array $array): void {
+        foreach ($array as $item) {
+            DB::transaction(function () use($item) {
+                User::find($item)->delete();
             });
         }
     }

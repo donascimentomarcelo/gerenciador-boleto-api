@@ -41,4 +41,9 @@ class UserController extends Controller
         $this->userService->edit($req->all(), $id);
         return response()->json([], Response::HTTP_NO_CONTENT);
     }
+
+    public function delete(Request $req): JsonResponse {
+        $this->userService->delete($req->input());
+        return response()->json([], Response::HTTP_NO_CONTENT);
+    }
 }
