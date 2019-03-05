@@ -32,4 +32,8 @@ class UserController extends Controller
         return response()->json([], 201);
     }
 
+    public function show(int $id): JsonResponse {
+        $user = $this->userService->findOne($id);
+        return response()->json($user, 201);
+    }
 }

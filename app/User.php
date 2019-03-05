@@ -12,6 +12,7 @@ class User extends Model
         'password',
     ];
     public $timestamps = false;
+    protected $hidden = ['password'];
 
     public  function client() {
         return $this->hasOne(Client::class);

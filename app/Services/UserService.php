@@ -24,4 +24,8 @@ class UserService {
         $client->save();
         });
     }
+
+    public function findOne(int $id): User {
+        return User::with('client')->find($id);
+    }
 }
