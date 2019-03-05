@@ -17,4 +17,8 @@ class User extends Model
     public  function client() {
         return $this->hasOne(Client::class);
     }
+
+    public  function ticket() {
+        return $this->hasOne(Ticket::class);
+    }
 }
