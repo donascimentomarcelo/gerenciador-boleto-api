@@ -28,4 +28,18 @@ class UserService {
     public function findOne(int $id): User {
         return User::with('client')->find($id);
     }
+
+    public function edit(array $req, int $id) {
+        $user = User::with('client')->find($id);
+
+        if ($user) {
+            DB::transaction(function () use($user, $req) {
+                $user->username = $req['username'];
+                $user->client->name = $req['client']['name'];
+                $user->client->lastname = $req['client']['lastname'];
+                $user->client->save();
+                $user->save();
+            });
+        }
+    }
 }
