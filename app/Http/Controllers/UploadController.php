@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class UploadController extends Controller
 {
@@ -20,11 +21,15 @@ class UploadController extends Controller
         return $return;
     }
 
-    public function destroy(Request $req) {
+    public function destroy(Request $req): JsonResponse {
         $array =  $req->all();
         foreach ($array as $item) {
             Storage::delete($item . '.pdf');
         }
         return response()->json([], Response::HTTP_NO_CONTENT);
+    }
+
+    public function download(string $username): StreamedResponse {
+        return Storage::download($username . '.pdf');
     }
 }
