@@ -15,7 +15,7 @@ class UserService {
     }
 
     public function listAll(): Collection {
-        return Client::all();
+        return Client::with('user')->get();
     }
 
     public function save(array $array): void {
