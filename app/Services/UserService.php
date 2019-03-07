@@ -5,12 +5,17 @@ namespace App\Services;
 use App\Client;
 use App\User;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class UserService {
 
     public function list(): LengthAwarePaginator {
         return Client::paginate(15);
+    }
+
+    public function listAll(): Collection {
+        return Client::all();
     }
 
     public function save(array $array): void {

@@ -27,6 +27,11 @@ class UserController extends Controller
         return response()->json($lista, Response::HTTP_OK);
     }
 
+    public function listAll(): JsonResponse {
+        $lista = $this->userService->listAll();
+        return response()->json($lista, Response::HTTP_OK);
+    }
+
     public function store(Request $req): JsonResponse {
         $this->userService->save($req->all());
         return response()->json([], Response::HTTP_CREATED);
