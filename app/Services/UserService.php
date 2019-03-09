@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class UserService {
 
     public function list(): LengthAwarePaginator {
-        return Client::paginate(15);
+        return Client::paginate(5);
     }
 
     public function listAll(): Collection {

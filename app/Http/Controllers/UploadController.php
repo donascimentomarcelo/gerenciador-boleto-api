@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -17,7 +18,8 @@ class UploadController extends Controller
     }
 
     public function renameImage(Request $req): array {
-        $return['filenametostore'] = $req->input('username').'.'.$req->file('file')->getClientOriginalExtension();
+        $username = User::find($req->input('user_id'))->username;
+        $return['filenametostore'] = $username.'.'.$req->file('file')->getClientOriginalExtension();
         return $return;
     }
 
