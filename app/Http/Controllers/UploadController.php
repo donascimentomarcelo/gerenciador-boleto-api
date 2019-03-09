@@ -19,7 +19,7 @@ class UploadController extends Controller
 
     public function renameImage(Request $req): array {
         $username = User::find($req->input('user_id'))->username;
-        $return['filenametostore'] = $username.'.'.$req->file('file')->getClientOriginalExtension();
+        $return['filenametostore'] = $username.'.pdf';
         return $return;
     }
 
