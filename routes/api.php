@@ -20,5 +20,5 @@ use Illuminate\Http\Request;
 
     Route::post('uploads/store', 'UploadController@store');
     Route::post('uploads/destroy', 'UploadController@destroy');
-    Route::get('uploads/download/{username}', 'UploadController@download');
+    Route::post('uploads/download/{username}', 'UploadController@download');
 //});

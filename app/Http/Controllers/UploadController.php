@@ -31,7 +31,13 @@ class UploadController extends Controller
         return response()->json([], Response::HTTP_NO_CONTENT);
     }
 
-    public function download(string $username): StreamedResponse {
-        return Storage::download($username . '.pdf');
+    public function download(string $username) {
+        $file = storage_path("app\\$username.pdf") ;
+
+        $headers = [
+            'Content-Type' => 'application/pdf',
+        ];
+
+        return response()->download($file, $username . '.pdf', $headers);
     }
 }
