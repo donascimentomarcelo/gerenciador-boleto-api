@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class UserService {
 
@@ -48,11 +49,9 @@ class UserService {
         }
     }
 
-    public function delete(array $array): void {
-        foreach ($array as $item) {
-            DB::transaction(function () use($item) {
-                User::find($item)->delete();
-            });
-        }
+    public function delete(int $id): void {
+        $user = $this->findOne($id);
+        Storage::delete($user->username.'.pdf');
+        User::find($id)->delete();
     }
 }

@@ -47,8 +47,8 @@ class UserController extends Controller
         return response()->json([], Response::HTTP_NO_CONTENT);
     }
 
-    public function delete(Request $req): JsonResponse {
-        $this->userService->delete($req->input());
+    public function destroy(int $id): JsonResponse {
+        $this->userService->delete($id);
         return response()->json([], Response::HTTP_NO_CONTENT);
     }
 }
