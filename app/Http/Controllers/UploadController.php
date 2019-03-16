@@ -13,7 +13,9 @@ class UploadController extends Controller
 {
     public function store(Request $req): JsonResponse {
         $image = $this->renameImage($req);
-        Storage::disk('local')->put($image['filenametostore'], fopen($req->file('file'), 'r+'), 'public');
+//        Storage::disk('local')->put($image['filenametostore'], fopen($req->file('file'), 'r+'), 'public');
+        $caminho = public_path('/imagens');
+        $req->file('file')->move($caminho, $image['filenametostore']);
         return response()->json([], Response::HTTP_NO_CONTENT);
     }
 
@@ -32,7 +34,7 @@ class UploadController extends Controller
     }
 
     public function download(string $username) {
-        $file = storage_path("app\\$username.pdf") ;
+        $file = public_path("/imagens\\$username.pdf") ;
 
         $headers = [
             'Content-Type' => 'application/pdf',
