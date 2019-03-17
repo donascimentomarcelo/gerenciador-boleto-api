@@ -15,11 +15,7 @@ class UploadController extends Controller
         $image = $this->renameImage($req);
 //        Storage::disk('local')->put($image['filenametostore'], fopen($req->file('file'), 'r+'), 'public');
         $caminho = public_path('/imagens');
-        try {
-            $req->file('file')->move($caminho, $image['filenametostore']);
-        } catch (Exception $e) {
-            die ('File did not upload: ' . $e->getMessage());
-        }
+        $req->file('file')->move($caminho, $image['filenametostore']);
         return response()->json([], Response::HTTP_NO_CONTENT);
     }
 
@@ -38,7 +34,13 @@ class UploadController extends Controller
     }
 
     public function download(string $username) {
-        $file = public_path("/imagens\\$username.pdf") ;
+        $file = null;
+        try {
+            $file = public_path("/imagens\\$username.pdf") ;
+        } catch (Exception $e) {
+            die ('File did not upload: ' . $e->getMessage());
+        }
+
 
         $headers = [
             'Content-Type' => 'application/pdf',
