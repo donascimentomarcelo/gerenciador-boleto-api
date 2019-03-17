@@ -15,7 +15,11 @@ class UploadController extends Controller
         $image = $this->renameImage($req);
 //        Storage::disk('local')->put($image['filenametostore'], fopen($req->file('file'), 'r+'), 'public');
         $caminho = public_path('/imagens');
-        $req->file('file')->move($caminho, $image['filenametostore']);
+        try {
+            $req->file('file')->move($caminho, $image['filenametostore']);
+        } catch (Exception $e) {
+            die ('File did not upload: ' . $e->getMessage());
+        }
         return response()->json([], Response::HTTP_NO_CONTENT);
     }
 
