@@ -36,7 +36,7 @@ class UploadController extends Controller
     public function download(string $username) {
         $file = null;
         try {
-            $file = public_path("/imagens\\$username.pdf") ;
+            $file = public_path("/imagens/".$username.pdf) ;
         } catch (Exception $e) {
             die ('File did not upload: ' . $e->getMessage());
         }
